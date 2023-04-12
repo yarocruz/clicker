@@ -25,7 +25,7 @@ function ClickCounter() {
     useEffect(() => {
         const successfulLookup = position => {
             const { latitude, longitude } = position.coords;
-            fetch(`https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=0d0ed8aa77ff49c89e3f18256b62b31a`)
+            fetch(`https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=${process.env.API_KEY}`)
                 .then(response => response.json())
                 .then(data => {
                     //console.log(data.results[0].components) // {city: "San Francisco", state: "California", country: "United States"}
