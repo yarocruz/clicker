@@ -32,8 +32,6 @@ function ClickCounter() {
             const response = await getData();
             setData(response);
             setCount(response.reduce((acc, cur) => acc + cur.clicks, 0));
-            setCountry(response[0].name)
-            setCity(response[0].city)
         };
         fetchData();
     }, []);
