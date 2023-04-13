@@ -6,14 +6,11 @@ function ClickCounter() {
     const [country, setCountry] = useState(null);
     const [city, setCity] = useState(null);
     const [data, setData] = useState(null);
-    const [location, setLocation] = useState(false);
 
     useEffect(() => {
         const successfulLookup = position => {
             const { latitude, longitude } = position.coords;
-            fetch(`https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=0d0ed8aa77ff49c89e3f18256b62b31a`, {
-                cache: 'force-cache',
-            })
+            fetch(`https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=0d0ed8aa77ff49c89e3f18256b62b31a`)
                 .then(response => response.json())
                 .then(data => {
                     setCountry(data.results[0].components.country);
@@ -22,14 +19,12 @@ function ClickCounter() {
         };
 
         // i have to wait a day to try this again and double check that it works as intended which is to only run this once
-        if (window.navigator && window.navigator.geolocation && location === false) {
+        if (window.navigator && window.navigator.geolocation) {
             window.navigator.geolocation
                 .getCurrentPosition(successfulLookup, (err) => console.log(err));
-            setLocation(true)
-            console.log('location', location)
             console.log('we should only see this once')
         }
-    }, [location]);
+    }, []);
 
     useEffect(() => {
         const fetchData = async () => {
