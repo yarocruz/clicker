@@ -24,7 +24,6 @@ function ClickCounter() {
         if (window.navigator && window.navigator.geolocation) {
             window.navigator.geolocation
                 .getCurrentPosition(successfulLookup, (err) => console.log(err));
-            console.log('we should only see this once')
         }
     }, []);
 
