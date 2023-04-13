@@ -8,20 +8,6 @@ function ClickCounter() {
     const [data, setData] = useState(null);
     const [location, setLocation] = useState(false);
 
-    console.log(country, city)
-
-    useEffect(() => {
-        const fetchData = async () => {
-            // only fetch the data once
-            const response = await getData();
-            setData(response);
-            setCount(response.reduce((acc, cur) => acc + cur.clicks, 0));
-            setCountry(response[0].name)
-            setCity(response[0].city)
-        };
-        fetchData();
-    }, []);
-
     useEffect(() => {
         const successfulLookup = position => {
             const { latitude, longitude } = position.coords;
@@ -44,6 +30,18 @@ function ClickCounter() {
             console.log('we should only see this once')
         }
     }, [location]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            // only fetch the data once
+            const response = await getData();
+            setData(response);
+            setCount(response.reduce((acc, cur) => acc + cur.clicks, 0));
+            setCountry(response[0].name)
+            setCity(response[0].city)
+        };
+        fetchData();
+    }, []);
 
     const handleClick = () => {
         updateClicks(country, city).then((response) => {
