@@ -38,7 +38,6 @@ export async function updateClicks(country, city) {
     }
     return getData();
 
-
 }
 
 // get the country data
@@ -46,7 +45,6 @@ export async function getData() {
     const countriesRef = collection(db, 'country');
     const countriesSnapshot = await getDocs(countriesRef);
     return countriesSnapshot.docs.map(doc => doc.data());
-
 }
 
 export default db;
