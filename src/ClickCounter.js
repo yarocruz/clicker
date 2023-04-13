@@ -10,7 +10,9 @@ function ClickCounter() {
     useEffect(() => {
         const successfulLookup = position => {
             const { latitude, longitude } = position.coords;
-            fetch(`https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=0d0ed8aa77ff49c89e3f18256b62b31a`)
+            fetch(`https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=0d0ed8aa77ff49c89e3f18256b62b31a`, {
+                cache: 'default'
+            })
                 .then(response => response.json())
                 .then(data => {
                     setCountry(data.results[0].components.country);
