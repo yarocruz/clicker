@@ -34,7 +34,7 @@ export async function updateClicks(country, city) {
 
     } else {
         // Create the document
-        await addDoc(countriesRef, { name: country, city: city, clicks: 1 });
+        await addDoc(countriesRef, { name: country ? country: 'unknown', city: city ? city : 'unknown', clicks: 1 });
     }
     return getData();
 
