@@ -30,7 +30,7 @@ export async function updateClicks(country, city) {
 
     if (countryDoc) {
         // Update the document and return the updated document
-        await updateDoc(countryDoc.ref, { name: country, city: city, clicks: countryDoc.data().clicks + 1 });
+        await updateDoc(countryDoc.ref, { name: country ? country: 'unknown', city: city ? city : 'unknown', clicks: countryDoc.data().clicks + 1 });
 
     } else {
         // Create the document
