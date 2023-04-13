@@ -26,8 +26,7 @@ export async function updateClicks(country, city) {
     // Check if the country exists
     const countryDoc = querySnapshot.docs.find(doc =>
         (doc.data().name === country && doc.data().city === city)
-        || (doc.data().name === null && doc.data().city === null)
-            || (doc.data().name === 'unknown' && doc.data().city === 'unknown'));
+        || (doc.data().name === null && doc.data().city === null));
 
     if (countryDoc) {
         // Update the document and return the updated document
@@ -35,6 +34,13 @@ export async function updateClicks(country, city) {
 
     } else {
         // Create the document
+        const unknown = querySnapshot.docs.find(doc =>
+            (doc.data().name === 'unknown' && doc.data().city === 'unknown'));
+        if (unknown) {
+            await updateDoc(unknown.ref, { clicks: unknown.data().clicks + 1 });
+            return getData();
+        }
+
         await addDoc(countriesRef, { name: country, city: city, clicks: 1 });
     }
     return getData();
