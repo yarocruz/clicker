@@ -38,8 +38,10 @@ export async function updateClicks(country, city) {
             const unknown = querySnapshot.docs.find(doc =>
                 (doc.data().name === 'unknown' && doc.data().city === 'unknown'));
             await updateDoc(unknown.ref, { clicks: unknown.data().clicks + 1 });
+        } else {
+            await addDoc(countriesRef, { name: country, city: city, clicks: 1 });
         }
-        await addDoc(countriesRef, { name: country, city: city, clicks: 1 });
+
     }
     return getData();
 
